@@ -1,0 +1,50 @@
+/*
+ * Dark-mode-only subset of the v2 dashboard's design tokens.
+ * Source of truth: lib/design/v2-tokens.css. When the dashboard's
+ * tokens change in a meaningful way, mirror the relevant values here.
+ */
+:root {
+  --bg-body: #110c13;
+  --bg-base: #251830;
+  --bg-card: #1d1a1d;
+  --bg-card-alt: #201c22;
+  --bg-elevated: #272233;
+  --bg-overlay: #201c22;
+  --bg-input: #1e1e1e;
+
+  --border-card: #2f2634;
+  --border-elevated: #3d3245;
+
+  --hover-card: #272233;
+
+  --text-primary: #f9f9f9;
+  --text-secondary: #a1a1aa;
+  --text-muted: #868089;
+  --text-faint: #5e5360;
+
+  --brand: #aa64ff;
+  --brand-pink: #de8bf3;
+  --brand-text: #d745ff;
+  --brand-grad: linear-gradient(135deg, #aa64ff, #de8bf3);
+
+  --success: #6fd26f;
+  --warning: #ffb347;
+  --error: #fc0a52;
+  --info: #6d8bff;
+  --resolved: #dd9fff;
+
+  --neon-glow: rgba(140, 60, 255, 0.45);
+  --neon-glow-soft: rgba(140, 60, 255, 0.2);
+  --neon-border: rgba(140, 60, 255, 0.4);
+  --focus-glow: rgba(222, 139, 243, 0.08);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 20px;
+
+  --shadow-glow-md: 0 0 6px var(--neon-glow), 0 0 16px var(--neon-glow-soft);
+  --shadow-glow-lg: 0 0 6px var(--neon-glow), 0 0 20px var(--neon-glow),
+    0 0 40px rgba(140, 60, 255, 0.1);
+}

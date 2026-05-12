@@ -1,0 +1,25 @@
+{
+  "name": "@ft/sdk",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./abi": "./src/abi/index.ts",
+    "./addresses": "./src/addresses.ts",
+    "./ancillary": "./src/ancillary.ts",
+    "./chain-ops": "./src/chain-ops/index.ts",
+    "./errors": "./src/errors.ts",
+    "./deploy": "./src/deploy/index.ts",
+    "./seed": "./src/seed/index.ts",
+    "./resolution": "./src/resolution/index.ts",
+    "./extend": "./src/extend/index.ts",
+    "./reads": "./src/reads/index.ts",
+    "./tokens": "./src/tokens.ts"
+  },
+  "peerDependencies": {
+    "viem": "^2.37.0"
+  }
+}

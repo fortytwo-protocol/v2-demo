@@ -1,0 +1,3 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`buildExtendArgs > encodes deterministic FTAdaptor.modifyTimestampEnd calldata 1`] = `"0x81c30f55abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789000000000000000000000000000000000000000000000000000000006b36ec44"`;
