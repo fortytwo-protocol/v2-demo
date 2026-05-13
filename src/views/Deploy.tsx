@@ -176,8 +176,7 @@ export function Deploy() {
               </div>
               <div className="pg-creator-callout-sub">
                 AI-assisted title, outcomes, and resolution criteria — paste
-                the generated content into the fields below for a clear,
-                dispute-proof market.
+                the generated content into the fields below.
               </div>
             </div>
             <div className="pg-creator-callout-cta">
