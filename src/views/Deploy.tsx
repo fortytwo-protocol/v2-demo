@@ -163,6 +163,29 @@ export function Deploy() {
 
       <div className="deploy-grid">
         <div>
+          <a
+            href="https://42creator.space/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pg-creator-callout"
+          >
+            <div className="pg-creator-callout-text">
+              <div className="pg-creator-callout-title">
+                Draft your market with 42 Creator
+                <span className="pg-creator-callout-tag">Recommended</span>
+              </div>
+              <div className="pg-creator-callout-sub">
+                AI-assisted title, outcomes, and resolution criteria — paste
+                the generated content into the fields below for a clear,
+                dispute-proof market.
+              </div>
+            </div>
+            <div className="pg-creator-callout-cta">
+              Open 42 Creator
+              <Icon name="external" size={14} />
+            </div>
+          </a>
+
           <FormSection
             icon="questionId"
             title="The question"
@@ -187,6 +210,46 @@ export function Deploy() {
               <Field icon="outcomes" label={`Outcomes (${outcomes.length}, ≥2)`}>
                 <OutcomeEditor outcomes={outcomes} onChange={setOutcomes} />
               </Field>
+            </FieldGrid>
+          </FormSection>
+
+          <FormSection
+            icon="ancillary"
+            title="Ancillary data"
+            hint="Resolution context (encoded as bytes)"
+          >
+            <FieldGrid cols={1}>
+              <Field label="Description">
+                <Textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Paste the resolution criteria from 42 Creator, or write your own plain-language explanation…"
+                />
+              </Field>
+              <Field
+                label="Early resolution"
+                hint="Set true if the market can be resolved before its end timestamp."
+              >
+                <label
+                  style={{
+                    display: "flex",
+                    gap: 8,
+                    alignItems: "center",
+                    fontSize: 13,
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={isEarlyResolution}
+                    onChange={(e) => setIsEarlyResolution(e.target.checked)}
+                  />
+                  Allow early resolution
+                </label>
+              </Field>
+              <details className="pg-ancillary-preview">
+                <summary>Encoded hex preview</summary>
+                <pre>{ancillaryHex}</pre>
+              </details>
             </FieldGrid>
           </FormSection>
 
@@ -278,46 +341,6 @@ export function Deploy() {
                   placeholder="10000"
                 />
               </Field>
-            </FieldGrid>
-          </FormSection>
-
-          <FormSection
-            icon="ancillary"
-            title="Ancillary data"
-            hint="Resolution context (encoded as bytes)"
-          >
-            <FieldGrid cols={1}>
-              <Field label="Description">
-                <Textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Plain-language explanation of how this resolves…"
-                />
-              </Field>
-              <Field
-                label="Early resolution"
-                hint="Set true if the market can be resolved before its end timestamp."
-              >
-                <label
-                  style={{
-                    display: "flex",
-                    gap: 8,
-                    alignItems: "center",
-                    fontSize: 13,
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={isEarlyResolution}
-                    onChange={(e) => setIsEarlyResolution(e.target.checked)}
-                  />
-                  Allow early resolution
-                </label>
-              </Field>
-              <details className="pg-ancillary-preview">
-                <summary>Encoded hex preview</summary>
-                <pre>{ancillaryHex}</pre>
-              </details>
             </FieldGrid>
           </FormSection>
 

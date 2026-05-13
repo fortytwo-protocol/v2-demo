@@ -355,6 +355,87 @@
   color: var(--text-faint);
   margin-top: 4px;
 }
+.pg-helper-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--brand-purple);
+  text-decoration: none;
+}
+.pg-helper-link:hover {
+  text-decoration: underline;
+}
+
+/* 42 Creator callout — prominent prompt to use the AI resolution drafter
+   before writing the description manually. Lives at the top of the
+   Ancillary data section. */
+.pg-creator-callout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(170, 100, 255, 0.12),
+    rgba(222, 139, 243, 0.08)
+  );
+  border: 1px solid rgba(170, 100, 255, 0.35);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+}
+.pg-creator-callout:hover {
+  border-color: var(--brand-purple);
+  box-shadow: 0 0 0 3px var(--focus-glow);
+  transform: translateY(-1px);
+}
+.pg-creator-callout-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.pg-creator-callout-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.pg-creator-callout-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-purple);
+  background: rgba(170, 100, 255, 0.15);
+  border: 1px solid rgba(170, 100, 255, 0.35);
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+.pg-creator-callout-sub {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+.pg-creator-callout-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  background: var(--brand-grad);
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+}
 
 /* Form section */
 .pg-form-section {
