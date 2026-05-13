@@ -344,7 +344,7 @@ export function Deploy() {
                 });
               }}
             >
-              Simulate &amp; Deploy
+              Deploy market
             </TxButton>
             <Button onClick={() => navigate({ view: "inspect" })}>Cancel</Button>
             {formError ? (

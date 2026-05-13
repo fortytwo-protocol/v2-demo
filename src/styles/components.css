@@ -298,6 +298,13 @@
   color: var(--text-primary);
   font-size: 13px;
   transition: border-color 0.15s, box-shadow 0.15s;
+  /* Tell the UA to use dark-mode form controls so the native calendar
+     picker icon on `datetime-local` inputs renders white instead of
+     near-black against our dark surface. */
+  color-scheme: dark;
+}
+.pg-input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
 }
 .pg-input:focus {
   outline: none;

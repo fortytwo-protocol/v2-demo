@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { useAccount, useChainId, useConnect, useDisconnect } from "wagmi";
+import {
+  useAccount,
+  useChainId,
+  useConnect,
+  useDisconnect,
+  useSwitchChain,
+} from "wagmi";
 import { bsc } from "wagmi/chains";
 import { shortenAddress } from "../lib/format";
 import { useEnvironment, type EnvironmentName } from "../lib/environment";
@@ -87,6 +93,7 @@ function WalletPill() {
   const chainId = useChainId();
   const { connect, connectors, isPending } = useConnect();
   const { disconnect } = useDisconnect();
+  const { switchChain, isPending: isSwitching } = useSwitchChain();
 
   const injected = connectors.find((c) => c.type === "injected") ?? connectors[0];
   const wrongChain = isConnected && chainId !== bsc.id;
@@ -106,9 +113,15 @@ function WalletPill() {
   return (
     <>
       {wrongChain ? (
-        <Badge tone="warn" withDot>
-          Wrong chain — switch to BSC
-        </Badge>
+        <button
+          type="button"
+          className="pg-btn pg-btn-secondary"
+          onClick={() => switchChain({ chainId: bsc.id })}
+          disabled={isSwitching}
+          style={{ padding: "6px 10px", fontSize: 12 }}
+        >
+          {isSwitching ? "Switching…" : "Switch to BSC"}
+        </button>
       ) : (
         <Badge tone="success" withDot>
           BNB Smart Chain

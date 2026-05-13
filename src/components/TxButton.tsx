@@ -9,7 +9,7 @@
 
 import { useState } from "react";
 import type { ReactNode } from "react";
-import { useAccount } from "wagmi";
+import { useAccount, useConnect } from "wagmi";
 import {
   decodeContractError,
   formatRevertError,
@@ -39,15 +39,34 @@ export function TxButton({
 }: Props) {
   const [phase, setPhase] = useState<Phase>({ kind: "idle" });
   const { isConnected } = useAccount();
+  const { connect, connectors, isPending: isConnecting } = useConnect();
   const busy = phase.kind === "submitting";
+
+  // If the wallet isn't connected, this button becomes a connect prompt
+  // instead of a dead disabled state — clicking it pops the wallet.
+  if (!isConnected) {
+    const injected =
+      connectors.find((c) => c.type === "injected") ?? connectors[0];
+    return (
+      <div className="pg-tx-button">
+        <Button
+          variant={variant}
+          disabled={!injected || isConnecting}
+          onClick={() => injected && connect({ connector: injected })}
+        >
+          {isConnecting ? "Connecting…" : "Connect wallet to continue"}
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="pg-tx-button">
       <Button
         variant={variant}
-        disabled={disabled || busy || !isConnected}
+        disabled={disabled || busy}
         onClick={async () => {
-          setPhase({ kind: "submitting", message: "Simulating…" });
+          setPhase({ kind: "submitting", message: "Submitting…" });
           try {
             await run();
             setPhase({ kind: "idle" });
@@ -65,7 +84,6 @@ export function TxButton({
       >
         {busy ? phase.message : children}
       </Button>
-      {!isConnected && <div className="pg-tx-hint">Connect your wallet first</div>}
       {phase.kind === "error" && (
         <div className="pg-tx-error">{formatRevertError(phase.decoded)}</div>
       )}
