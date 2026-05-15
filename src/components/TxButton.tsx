@@ -10,6 +10,7 @@
 import { useState } from "react";
 import type { ReactNode } from "react";
 import { useAccount, useConnect } from "wagmi";
+import { bsc } from "wagmi/chains";
 import {
   decodeContractError,
   formatRevertError,
@@ -52,7 +53,7 @@ export function TxButton({
         <Button
           variant={variant}
           disabled={!injected || isConnecting}
-          onClick={() => injected && connect({ connector: injected })}
+          onClick={() => injected && connect({ connector: injected, chainId: bsc.id })}
         >
           {isConnecting ? "Connecting…" : "Connect wallet to continue"}
         </Button>

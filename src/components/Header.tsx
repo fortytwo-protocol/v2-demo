@@ -102,7 +102,7 @@ function WalletPill() {
     return (
       <Button
         variant="primary"
-        onClick={() => injected && connect({ connector: injected })}
+        onClick={() => injected && connect({ connector: injected, chainId: bsc.id })}
         disabled={!injected || isPending || status === "connecting"}
       >
         {isPending ? "Connecting…" : "Connect wallet"}
