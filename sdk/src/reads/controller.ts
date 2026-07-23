@@ -69,12 +69,14 @@ export async function isFinalised(opts: PerQuestion): Promise<boolean> {
   });
 }
 
-export async function getFeeRate(opts: PerQuestion): Promise<bigint> {
+export async function getFeeRate(
+  opts: ControllerReadBase & { market: Address },
+): Promise<bigint> {
   return opts.publicClient.readContract({
     address: opts.controllerV2,
     abi: FT_CONTROLLER_V2_ABI,
     functionName: "getFeeRate",
-    args: [opts.questionId],
+    args: [opts.market],
   });
 }
 

@@ -6,19 +6,19 @@
 // Cache keys are scoped by environment so switching between production
 // and staging doesn't leak cached state across controllers.
 
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { usePublicClient } from "wagmi";
-import { type Address, type Hex, type PublicClient } from "viem";
+import { decodeAncillary, type DecodedAncillary } from "@ft/sdk/ancillary";
 import {
+  getAncillaryUpdates,
+  getOutcomeNames,
+  getConfig as readControllerConfig,
+  readQuestionState,
   snapshotMarket,
   snapshotOt,
-  getConfig as readControllerConfig,
-  getOutcomeNames,
-  getAncillaryUpdates,
-  readQuestionState,
 } from "@ft/sdk/reads";
 import { outcomeIndexToTokenId } from "@ft/sdk/tokens";
-import { decodeAncillary, type DecodedAncillary } from "@ft/sdk/ancillary";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { type Address, type Hex, type PublicClient } from "viem";
+import { usePublicClient } from "wagmi";
 import { useEnvironment, type Environment } from "./environment";
 
 interface DeployParams {
@@ -47,6 +47,7 @@ interface OtSnapshotEntry {
   supply: bigint;
   totalMarketCap: bigint;
   payoutPerOt: bigint;
+  marketCap: bigint;
 }
 
 export interface MarketSnapshot {

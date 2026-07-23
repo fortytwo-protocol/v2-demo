@@ -183,6 +183,7 @@ describe("getQuestionSnapshot (multicall composer)", () => {
       publicClient,
       controllerV2: CONTROLLER,
       questionId: QID,
+      market: MARKET,
     });
     expect(snap).toEqual({
       numOutcomes: BigInt(2),

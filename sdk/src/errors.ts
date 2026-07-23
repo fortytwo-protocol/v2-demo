@@ -81,6 +81,8 @@ const FRIENDLY_TITLES: Record<string, (args: readonly unknown[]) => string> = {
     "Collateral token is not on the registry whitelist.",
   RegistryCurveNotAllowed: () =>
     "Curve contract is not on the registry whitelist.",
+  FactoryCurveNotAllowed: () =>
+    "Curve contract is not whitelisted for market creation.",
   RegistrySeedBelowMinimum: () => "Seed amount is below the minimum.",
   RegistryDuplicateOutcome: () =>
     "Duplicate outcome name — outcomes must be unique.",
@@ -92,6 +94,12 @@ const FRIENDLY_TITLES: Record<string, (args: readonly unknown[]) => string> = {
   RegistryInsufficientOutcomesGiven: () => "At least 2 outcomes are required.",
   RegistryOutcomeImagesMismatch: () =>
     "Outcome image URI count must match outcome name count.",
+  RegistryOutcomeLengthMismatch: () =>
+    "Outcome count mismatch — the provided lists don't line up.",
+  RegistryInvalidNumOutcomes: () =>
+    "Invalid outcome index — outside the market's outcome range.",
+  RegistryExceedMaxAncillaryDataUpdateLength: () =>
+    "Ancillary update is too long — exceeds the max update length.",
   RegistryPaused: () => "Registry is paused.",
   AdaptorInvalidQuestion: () => "Adaptor: invalid question ID.",
   AdaptorSeedCostExceedsBudget: () =>

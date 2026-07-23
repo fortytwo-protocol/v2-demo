@@ -22,6 +22,7 @@ export async function getQuestionSnapshot(opts: {
   publicClient: PublicClient;
   controllerV2: Address;
   questionId: Hex;
+  market: Address;
 }): Promise<QuestionSnapshot> {
   const contract = {
     address: opts.controllerV2,
@@ -32,12 +33,24 @@ export async function getQuestionSnapshot(opts: {
     await opts.publicClient.multicall({
       allowFailure: false,
       contracts: [
-        { ...contract, functionName: "getNumOutcomes", args: [opts.questionId] },
-        { ...contract, functionName: "getOutcomeNames", args: [opts.questionId] },
+        {
+          ...contract,
+          functionName: "getNumOutcomes",
+          args: [opts.questionId],
+        },
+        {
+          ...contract,
+          functionName: "getOutcomeNames",
+          args: [opts.questionId],
+        },
         { ...contract, functionName: "getOutcomeEnd", args: [opts.questionId] },
-        { ...contract, functionName: "getOutcomeAnswer", args: [opts.questionId] },
+        {
+          ...contract,
+          functionName: "getOutcomeAnswer",
+          args: [opts.questionId],
+        },
         { ...contract, functionName: "isFinalised", args: [opts.questionId] },
-        { ...contract, functionName: "getFeeRate", args: [opts.questionId] },
+        { ...contract, functionName: "getFeeRate", args: [opts.market] },
       ],
     });
 

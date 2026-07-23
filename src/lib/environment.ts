@@ -9,17 +9,22 @@
 // reads from the old env don't leak into the new one.
 
 import {
+  bscMainnet,
+  bscUat,
+  externalAddresses,
+  type FtDeployment,
+} from "@ft/sdk/addresses";
+import { useQueryClient } from "@tanstack/react-query";
+import {
   createContext,
+  createElement,
   useContext,
   useEffect,
   useMemo,
   useState,
   type ReactNode,
 } from "react";
-import { createElement } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 import type { Address } from "viem";
-import { bscMainnet, bscUat, externalAddresses } from "@ft/sdk/addresses";
 
 export type EnvironmentName = "production" | "staging";
 
@@ -47,8 +52,21 @@ export interface Environment {
   curvePresets: CurvePreset[];
 }
 
-const BSCSCAN_URL =
-  import.meta.env.VITE_BSCSCAN_URL ?? "https://bscscan.com";
+const BSCSCAN_URL = import.meta.env.VITE_BSCSCAN_URL ?? "https://bscscan.com";
+
+function powerLdaV2Presets(dep: FtDeployment): CurvePreset[] {
+  return (dep.PowerLDACurveV2 ?? []).map((curve, i) => {
+    const raw = curve.timeKinkStart;
+    const kink =
+      typeof raw === "string" || typeof raw === "number"
+        ? Number(raw) / 1e18
+        : NaN;
+    const label = Number.isFinite(kink)
+      ? `PowerLDACurveV2 · kink ${kink.toFixed(2)}`
+      : `PowerLDACurveV2 #${i + 1}`;
+    return { label, address: curve.addy };
+  });
+}
 
 export const ENVIRONMENTS: Record<EnvironmentName, Environment> = {
   production: {
@@ -67,9 +85,8 @@ export const ENVIRONMENTS: Record<EnvironmentName, Environment> = {
       },
     ],
     curvePresets: [
-      { label: "PowerCurve", address: bscMainnet.PowerCurve![0]!.addy },
-      { label: "PowerLDACurve", address: bscMainnet.PowerLDACurve![0]!.addy },
       { label: "ClockCurve", address: bscMainnet.ClockCurve![0]!.addy },
+      ...powerLdaV2Presets(bscMainnet),
     ],
   },
   staging: {
@@ -84,9 +101,8 @@ export const ENVIRONMENTS: Record<EnvironmentName, Environment> = {
       { label: "FTBUSDT", address: bscUat.FTUSD!, decimals: 18 },
     ],
     curvePresets: [
-      { label: "PowerCurve", address: bscUat.PowerCurve![0]!.addy },
-      { label: "PowerLDACurve", address: bscUat.PowerLDACurve![0]!.addy },
       { label: "ClockCurve", address: bscUat.ClockCurve![0]!.addy },
+      ...powerLdaV2Presets(bscUat),
     ],
   },
 };
